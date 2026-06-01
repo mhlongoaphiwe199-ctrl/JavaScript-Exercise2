@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade Checker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="brand">
+            <div class="logo">ACM</div>
+            <div>
+                <strong>Grade Checker</strong>
+                <span class="brand-text">JavaScript Bootcamp — Task 2</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-main">
+
+        <section class="form-section">
+            <h1>Student Grade Checker</h1>
+            <p class="subtitle">Enter a student's name and mark to instantly check their result.</p>
+
+            <form id="grade-form">
+
+                <div class="form-group">
+                    <label for="student-name">Student name</label>
+                    <input
+                        type="text"
+                        id="student-name"
+                        name="student-name"
+                        placeholder="e.g. Aphiwe Mhlongo"
+                        autocomplete="off"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="student-mark">Mark (0 – 100)</label>
+                    <input
+                        type="number"
+                        id="student-mark"
+                        name="student-mark"
+                        placeholder="e.g. 75"
+                        min="0"
+                        max="100"
+                    >
+                </div>
+
+                <div id="error-msg" class="error-msg"></div>
+
+                <div class="form-actions">
+                    <button type="submit" id="submit-btn">Check result</button>
+                </div>
+
+            </form>
+
+            <div id="result-area" class="result-area"></div>
+        </section>
+
+        <section class="list-section">
+            <div class="list-header">
+                <h2>Submitted students</h2>
+                <span id="student-count" class="count-badge">0 students</span>
+            </div>
+
+            <ul id="student-list" class="student-list">
+                <li class="empty-state">No students submitted yet.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <span>Aphiwe Mhlongo &mdash; JavaScript Bootcamp Task 2</span>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

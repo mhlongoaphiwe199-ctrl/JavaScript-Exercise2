@@ -1,0 +1,348 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --ink:        #1a1a1a;
+    --paper:      #f5f2ec;
+    --accent:     #b85c2a;
+    --accent-lt:  #d4753a;
+    --muted:      #6b6660;
+    --border:     #d8d2c8;
+    --white:      #ffffff;
+
+    --pass-distinction-bg: #e8f5e9;
+    --pass-distinction-cl: #1b5e20;
+    --pass-distinction-br: #2e7d32;
+
+    --pass-merit-bg: #e3f2fd;
+    --pass-merit-cl: #0d47a1;
+    --pass-merit-br: #1565c0;
+
+    --pass-bg:    #fff8e1;
+    --pass-cl:    #e65100;
+    --pass-br:    #f57c00;
+
+    --fail-bg:    #fdecea;
+    --fail-cl:    #b71c1c;
+    --fail-br:    #c62828;
+
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans:  'DM Sans', system-ui, sans-serif;
+
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 3rem;
+    --transition: 0.25s ease;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+    --shadow-md: 0 6px 24px rgba(0,0,0,0.11);
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-sans);
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-header {
+    display: flex;
+    align-items: center;
+    padding: 1.1rem var(--space-lg);
+    background: var(--paper);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+}
+
+.brand { display: flex; align-items: center; gap: var(--space-sm); }
+
+.logo {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1rem;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.35rem 0.65rem;
+    letter-spacing: 0.06em;
+}
+
+.brand strong { display: block; font-size: 0.9rem; font-weight: 500; }
+.brand-text   { font-size: 0.72rem; color: var(--muted); }
+
+.page-main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: start;
+}
+
+.form-section {
+    padding: var(--space-lg);
+    border-right: 1px solid var(--border);
+}
+
+.form-section h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    margin-bottom: var(--space-xs);
+    position: relative;
+    padding-bottom: var(--space-sm);
+}
+
+.form-section h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 3rem;
+    height: 3px;
+    background: var(--accent);
+}
+
+.subtitle {
+    font-size: 0.92rem;
+    color: var(--muted);
+    margin-bottom: var(--space-md);
+    margin-top: var(--space-sm);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: var(--space-sm);
+}
+
+.form-group label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.form-group input {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 0.8rem 1rem;
+    outline: none;
+    width: 100%;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form-group input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(184, 92, 42, 0.12);
+}
+
+.error-msg {
+    font-size: 0.84rem;
+    color: var(--fail-cl);
+    background: var(--fail-bg);
+    border-left: 3px solid var(--fail-br);
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.35s ease, padding 0.35s ease;
+}
+
+.error-msg.visible {
+    max-height: 60px;
+    opacity: 1;
+    padding: 0.65rem 1rem;
+    margin-bottom: var(--space-sm);
+}
+
+.form-actions { margin-top: var(--space-md); }
+
+.form-actions button {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    padding: 0.85rem 2.2rem;
+    background: var(--accent);
+    color: var(--white);
+    border: 2px solid var(--accent);
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+
+.form-actions button:hover {
+    background: transparent;
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.form-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.result-area {
+    margin-top: var(--space-md);
+    border-radius: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.6;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+}
+
+.result-area.visible {
+    max-height: 200px;
+    opacity: 1;
+    padding: 1.2rem 1.4rem;
+}
+
+.result-area.distinction {
+    background: var(--pass-distinction-bg);
+    color: var(--pass-distinction-cl);
+    border-left: 4px solid var(--pass-distinction-br);
+}
+
+.result-area.merit {
+    background: var(--pass-merit-bg);
+    color: var(--pass-merit-cl);
+    border-left: 4px solid var(--pass-merit-br);
+}
+
+.result-area.pass {
+    background: var(--pass-bg);
+    color: var(--pass-cl);
+    border-left: 4px solid var(--pass-br);
+}
+
+.result-area.fail {
+    background: var(--fail-bg);
+    color: var(--fail-cl);
+    border-left: 4px solid var(--fail-br);
+}
+
+.result-area .result-name  { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; }
+.result-area .result-grade { font-size: 1.5rem; font-weight: 700; margin: 0.3rem 0; }
+.result-area .result-mark  { font-size: 0.85rem; opacity: 0.8; }
+
+.list-section {
+    padding: var(--space-lg);
+}
+
+.list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--border);
+}
+
+.list-header h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+}
+
+.count-badge {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    background: var(--accent);
+    color: var(--white);
+    padding: 0.3rem 0.8rem;
+    border-radius: 99px;
+    transition: background var(--transition);
+}
+.count-badge:hover {
+    background: var(--accent-lt);
+}
+.student-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+
+.empty-state {
+    font-size: 0.88rem;
+    color: var(--muted);
+    padding: var(--space-md);
+    text-align: center;
+    border: 1px dashed var(--border);
+    background: var(--white);
+}
+
+.student-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.1rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--border);
+    animation: slideIn 0.3s ease;
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.student-item:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-sm);
+}
+
+.student-item.distinction { border-left-color: var(--pass-distinction-br); }
+.student-item.merit       { border-left-color: var(--pass-merit-br); }
+.student-item.pass        { border-left-color: var(--pass-br); }
+.student-item.fail        { border-left-color: var(--fail-br); }
+
+.student-item .s-name  { font-size: 0.9rem; font-weight: 500; }
+.student-item .s-mark  { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+.student-item .s-badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border-radius: 99px;
+}
+
+.student-item.distinction .s-badge { background: var(--pass-distinction-bg); color: var(--pass-distinction-cl); }
+.student-item.merit       .s-badge { background: var(--pass-merit-bg);       color: var(--pass-merit-cl); }
+.student-item.pass        .s-badge { background: var(--pass-bg);              color: var(--pass-cl); }
+.student-item.fail        .s-badge { background: var(--fail-bg);              color: var(--fail-cl); }
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.site-footer {
+    padding: 1.2rem var(--space-lg);
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .page-main { grid-template-columns: 1fr; }
+    .form-section { border-right: none; border-bottom: 1px solid var(--border); }
+}
+
+@media (max-width: 600px) {
+    .site-header  { padding: 1rem 1.2rem; }
+    .form-section { padding: var(--space-md) 1.2rem; }
+    .list-section { padding: var(--space-md) 1.2rem; }
+    .form-actions button { width: 100%; }
+}
